@@ -1,0 +1,55 @@
+<aura:component controller="PSMyServiceAppointmentsController" implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+   <aura:attribute name="view" type="String" default="Today"/>
+   <aura:attribute name="viewOptions" type="List" default="['Today','Upcoming']"/>
+   <aura:attribute name="columnDefs" type="List"/>
+   <aura:attribute name="data" type="List"/>
+   <aura:attribute name="msg" type="String"/>
+   <aura:attribute name="initLoad" type="Boolean" default="true" />
+
+   <aura:attribute name="errorMsg" type="String" />
+   
+   <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+   <div class="container">
+        
+        <aura:if isTrue="{!v.errorMsg.length > 0}">
+            <ui:message title="Error" severity="error" closable="true">
+                {!v.errorMsg}
+            </ui:message>
+        </aura:if>
+        <div class="slds-grid slds-wrap slds-grid--pull-padded">
+            <div class="slds-p-horizontal--small slds-size--1-of-1">
+                <fieldset class="slds-box slds-theme--default">
+                    <p style="font-weight: bold;font-size: 135%;" class="slds-p-bottom--small">My Appointments</p>
+                    <form class="slds-form--inline slds-p-bottom_medium" id="filterForm">
+                        <div class="slds-form-element slds-is-required" style="vertical-align: top;">
+                            <label class="slds-form-element__label" for="view">List:</label>
+                            <div class="slds-form-element__control">
+                                <ui:inputSelect aura:id="view" class="slds-input" value="{!v.view}" change="{!c.onViewChange}">
+                                    <aura:iteration items="{!v.viewOptions}" var="v">
+                                        <ui:inputSelectOption text="{!v}" label="{!v}"/>
+                                    </aura:iteration>
+                                </ui:inputSelect>
+                            </div>
+                        </div>
+                    </form>
+                    
+                    <aura:renderIf isTrue="{!and(v.data != null, v.data.length > 0)}">
+                      <lightning:datatable data="{!v.data}"
+                       columns="{!v.columnDefs}"
+                       keyField="raId" 
+                       hideCheckboxColumn="true"/>
+                    </aura:renderIf>
+                    
+                    <aura:renderIf isTrue="{!or(v.data == null, v.data.length == 0)}">
+                        {!v.msg}
+                    </aura:renderIf>
+                    
+                </fieldset>
+                
+
+            </div>
+       </div>
+    </div>
+    
+</aura:component>
