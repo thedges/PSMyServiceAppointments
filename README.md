@@ -4,7 +4,7 @@ This package contains a component to show FSL service appointments for today and
 
 Note: Currently this component has no configuration parameters as was developed for specific demo. Reach out to me if there is customization required.
 
-![alt text](https://github.com/thedges/PSMyServiceAppointments/blob/master/PSMyServiceAppoints.gif "Sample Image")
+![alt text](https://github.com/thedges/PSMyServiceAppointments/blob/master/PSMyServiceAppointments.gif "Sample Image")
 
 <a href="https://githubsfdeploy.herokuapp.com">
   <img alt="Deploy to Salesforce"
